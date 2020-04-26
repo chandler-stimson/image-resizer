@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Resizer</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <form id=content>
+    <div id="boxes">
+      <h3>Image</h3>
+      <div class="contents" title="Final image width in pixel or percent">
+        <span>Width</span>
+        <input type="number" min="1" step="0.001" id="iw" required>
+        <label tabindex="0"><input type="radio" value="px" name="iw" checked><span>px</span></label>
+        <label tabindex="0"><input type="radio" value="%" name="iw"><span>%</span></label>
+      </div>
+      <div tabindex="0" id="iwh" data-command="toggle-proportional" class="active"></div>
+      <div class="contents" title="Final image height in pixel or percent">
+        <span>Height</span>
+        <input type="number" min="1" step="0.001" id="ih" required>
+        <label tabindex="0"><input type="radio" value="px" name="ih" checked><span>px</span></label>
+        <label tabindex="0"><input type="radio" value="%" name="ih"><span>%</span></label>
+      </div>
+      <div class="contents" title="A Number between 0 and 100 indicating the image quality to use for image formats that use lossy compression such as image/jpeg and image/webp.">
+        <span>Quality</span>
+        <span></span>
+        <input type="number" id="quality" min="0" max="100" required value="92">
+        <span style="text-align: center">%</span>
+        <span></span>
+      </div>
+      <h3>Canvas</h3>
+      <div class="contents" title="Final canvas width in pixel or percent. The image is placed in the middle of the canvas">
+        <span>Width</span>
+        <input type="number" min="1" step="0.001" id="cw" placeholder="optional">
+        <label tabindex="0"><input type="radio" value="px" name="cw" checked><span>px</span></label>
+        <label tabindex="0"><input type="radio" value="%" name="cw"><span>%</span></label>
+      </div>
+      <div tabindex="0" id="cwh" data-command="toggle-proportional" class="active"></div>
+      <div class="contents" title="Final canvas height in pixel or percent. The image is placed in the middle of the canvas">
+        <span>Height</span>
+        <input type="number" min="1" step="0.001" id="ch" placeholder="optional">
+        <label tabindex="0"><input type="radio" value="px" name="ch" checked><span>px</span></label>
+        <label tabindex="0"><input type="radio" value="%" name="ch"><span>%</span></label>
+      </div>
+      <h3>Background</h3>
+      <div class="contents" title="Background color of the image">
+        <span>Color</span>
+        <span></span>
+        <input type="color" id="color">
+        <span></span>
+        <span></span>
+      </div>
+      <div class="contents" title="Background opacity of the canvas. To have a transparent background use zero value">
+        <span>Opacity</span>
+        <span></span>
+        <input type="number" id="opacity" min="0" max="100" required value="0">
+        <span style="text-align: center">%</span>
+        <span></span>
+      </div>
+    </div>
+    <label id="image" data-msg="Browse or Drag Image(s)" data-count="0">
+      <input type="file" multiple accept="image/*">
+    </label>
+    <div id="add">
+      <input type="submit" value="ADD" data-command="add" disabled>
+      <input type="submit" value="RUN" data-command="run" disabled>
+    </div>
+  </form>
+  <form id="jobs">
+    <template id="job">
+      <div><span></span><span data-command="remove">✕</span></div>
+    </template>
+    <div data-id="jobs"></div>
+    <div id="tools">
+      <select id="profiles">
+        <option disabled>Load a Profile</option>
+      </select>
+      <button type="button" disabled id="load-profile" title="Load all resizing jobs from this profile">Load<span class="shrink"> Profile</span></button>
+      <button type="button" disabled id="remove-profile" title="Remove this profile and all its resizing jobs">Remove<span class="shrink"> Profile</span></button>
+      <button type="button" disabled id="add-profile" title="Save or replace the current list of resizing jobs in a profile for later use">Add<span class="shrink"> Profile</span></button>
+      <select id="format" title="Format of the images">
+        <option value="png">PNG</option>
+        <option value="jpeg" disabled>JPG</option>
+        <option value="webp">WebP</option>
+      </select>
+      <input type="submit" value="RUN" disabled>
+    </div>
+  </form>
+  <script type="text/javascript" src="resize.js/resize.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
