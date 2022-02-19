@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "version": "0.2.0",
+  "name": "Image Magic",
+  "description": "Swiss Army Knife of Image Manipulation (Resize, crop, flip, rotate, or remove background color)",
+  "permissions": [
+    "storage"
+   ],
+  "homepage_url": "https://add0n.com/image-resizer.html",
+   "background": {
+    "service_worker": "worker.js"
+  },
+  "icons": {
+    "16": "data/icons/16.png",
+    "19": "data/icons/19.png",
+    "32": "data/icons/32.png",
+    "38": "data/icons/38.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png",
+    "256": "data/icons/256.png",
+    "512": "data/icons/512.png"
+  },
+  "action": {},
+  "commands": {
+    "_execute_action": {
+      "description": "Press the action button"
+    }
+  },
+  "sandbox": {
+    "pages": [
+      "/data/window/magick/sandbox.html"
+    ]
+  },
+  "content_security_policy": {
+    "sandbox": "sandbox allow-scripts; script-src 'self' 'unsafe-eval'; worker-src blob:"
+  }
+}

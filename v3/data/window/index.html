@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image Magic - Drop Images to Start</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <div id="scroll">
+    <fieldset>
+      <legend><label class="flex"><input type="checkbox" id="resize"> <span>Resize</span></label></legend>
+      <div>
+        Resize to <input type="text" id="resize-width" placeholder="width"> × <input type="text" id="resize-height" placeholder="height (optional)">
+        <input type="button" id="fill-resize" value="Fill with Image Dimensions" disabled>
+      </div>
+      <p>Fill one or both values with a number that represents the size in pixels. Alternatively, use a relative value in percent (e.g.: 50%)</p>
+    </fieldset>
+    <fieldset>
+      <legend><label><input type="checkbox" id="crop"> <span>Crop</span></label></legend>
+      <div class="five">
+        Box
+        <input type="text" id="crop-width" placeholder="width">
+        ×
+        <input type="text" id="crop-height" placeholder="height">
+        <input type="button" id="fill-crop" value="Fill with Image Dimensions" disabled>
+        Offset
+        <input type="text" id="crop-x" placeholder="x" value="0">
+        ×
+        <input type="text" id="crop-y" placeholder="y" value="0">
+      </div>
+    </fieldset>
+    <div class="two">
+      <fieldset>
+        <legend>Flip</legend>
+        <label><input type="checkbox" id="flip-vertically"> Vertically</label>
+        <label><input type="checkbox" id="flip-horizonally"> Horizontally</label>
+        <label><input type="checkbox" id="flip-transpose"> Transpose (Flip vertically and Rotate 90 degrees)</label>
+        <label><input type="checkbox" id="flip-transverse"> Transpose (Flip Horizontally and Rotate 270 degrees)</label>
+      </fieldset>
+      <fieldset>
+        <legend>Rotate</legend>
+        <div>Rotate <input type="number" id="rotate" value="0"> degrees</div>
+      </fieldset>
+    </div>
+    <fieldset>
+      <legend><label class="flex"><input type="checkbox" id="extent"> <span>Canvas</span></label></legend>
+      <div>Resize canvas to <input type="text" id="canvas-width" placeholder="width (optional)"> × <input type="text" id="canvas-height" placeholder="height (optional)"></div>
+      <div>Place image at <select id="gravity">
+        <option value="NorthWest">NorthWest</option>
+        <option value="North">North</option>
+        <option value="NorthEast">NorthEast</option>
+        <option value="West">West</option>
+        <option value="Center" selected>Center</option>
+        <option value="East">East</option>
+        <option value="SouthWest">SouthWest</option>
+        <option value="South">South</option>
+        <option value="SouthEast">SouthEast</option>
+      </select></div>
+      <label class="flex"><input type="checkbox" id="background"> Set <input type="color" id="background-color"> Background Color</label>
+    </fieldset>
+    <div class="two">
+      <fieldset>
+        <legend><label class="flex"><input type="checkbox" id="remove"><span>Remove Color</span></label></legend>
+        <div class="flex">
+          Remove <input type="color" id="remove-color"> color from image with tolerance of
+        </div>
+        <input type="range" id="background-fuzz" min="0" max="100" step="0.1" value="1">
+      </fieldset>
+      <fieldset>
+        <legend>Color Management</legend>
+        <div class="flex">Convert Image to <select id="color-management">
+          <option value="">Do Not Alter</option>
+          <option value="-colorspace LinearGray">LinearGray</option>
+          <option value="-colorspace Gray">Gray</option>
+          <option value="-colorspace RGB -colorspace Gray">RGB -> Gray</option>
+          <option value="-intensity Rec709luminance -colorspace gray">Rec709luminance -> Gray</option>
+        </select></div>
+      </fieldset>
+    </div>
+  </div>
+  <fieldset>
+    <legend>Save as</legend>
+    <div><select id="format">
+      <optgroup label="Popular Formats">
+        <option value="" selected>Use Original Format</option>
+        <option value="bmp">BMP (Microsoft Windows bitmap)</option>
+        <option value="gif">GIF (CompuServe Graphics Interchange Format)</option>
+        <option value="jpeg">JPEG (Joint Photographic Experts Group JFIF format)</option>
+        <option value="pdf">PDF (Portable Document Format)</option>
+        <option value="png">PNG (Portable Network Graphics)</option>
+        <option value="tiff">TIFF (Tagged Image File Format)</option>
+      </optgroup>
+      <optgroup label="Other Formats">
+        <option value="avs">AVS (AVS X image)</option>
+        <option value="cmyk">CMYK (Raw cyan, magenta, yellow, and black samples)</option>
+        <option value="dcx">DCX (ZSoft IBM PC multi-page Paintbrush image)</option>
+        <option value="dib">DIB (Microsoft Windows Device Independent Bitmap)</option>
+        <option value="dpx">DPX (Digital Moving Picture Exchange)</option>
+        <option value="epdf">EPDF (Encapsulated Portable Document Format)</option>
+        <option value="epi">EPI (Adobe Encapsulated PostScript Interchange format)</option>
+        <option value="eps">EPS (Adobe Encapsulated PostScript)</option>
+        <option value="eps2">EPS2 (Adobe Level II Encapsulated PostScript)</option>
+        <option value="eps3">EPS3 (Adobe Level III Encapsulated PostScript)</option>
+        <option value="epsf">EPSF (Adobe Encapsulated PostScript)</option>
+        <option value="epsi">EPSI (Adobe Encapsulated PostScript Interchange format)</option>
+        <option value="ept">EPT (Adobe Encapsulated PostScript Interchange format with TIFF preview)</option>
+        <option value="fax">FAX (Group 3 TIFF)</option>
+        <option value="fits">FITS (Flexible Image Transport System)</option>
+        <option value="fpx">FPX (FlashPix Format)</option>
+        <option value="gray">GRAY (Raw gray samples)</option>
+        <option value="jbig">JBIG (Joint Bi-level Image experts Group file interchange format)</option>
+        <option value="jng">JNG (Multiple-image Network Graphics)</option>
+        <option value="jp2">JP2 (JPEG-2000 JP2 File Format Syntax)</option>
+        <option value="jpc">JPC (JPEG-2000 Code Stream Syntax)</option>
+        <option value="miff">MIFF (Magick image file format)</option>
+        <option value="mono">MONO (Bi-level bitmap in least-significant-byte first order)</option>
+        <option value="mng">MNG (JPEG Network Graphics)</option>
+        <option value="mpeg">MPEG (Motion Picture Experts Group file interchange format (version 1))</option>
+        <option value="m2v">M2V (Motion Picture Experts Group file interchange format (version 2))</option>
+        <option value="mpc">MPC (Magick Persistent Cache image file format)</option>
+        <option value="msl">MSL (Magick Scripting Language)</option>
+        <option value="mtv">MTV (MTV Raytracing image format)</option>
+        <option value="mvg">MVG (Magick Vector Graphics.)</option>
+        <option value="otb">OTB (On-the-air Bitmap)</option>
+        <option value="p7">P7 (Xv's Visual Schnauzer thumbnail format)</option>
+        <option value="palm">PALM (Palm pixmap)</option>
+        <option value="pbm">PBM (Portable bitmap format (black and white))</option>
+        <option value="pcd">PCD (Photo CD)</option>
+        <option value="pcds">PCDS (Photo CD)</option>
+        <option value="pcl">PCL (HP Page Control Language)</option>
+        <option value="pcx">PCX (ZSoft IBM PC Paintbrush file)</option>
+        <option value="pdb">PDB (Palm Database ImageViewer Format)</option>
+        <option value="pgm">PGM (Portable graymap format (gray scale))</option>
+        <option value="picon">PICON (Personal Icon)</option>
+        <option value="pict">PICT (Apple Macintosh QuickDraw/PICT file)</option>
+        <option value="pnm">PNM (Portable anymap)</option>
+        <option value="ppm">PPM (Portable pixmap format (color))</option>
+        <option value="ps">PS (Adobe PostScript file)</option>
+        <option value="ps2">PS2 (Adobe Level II PostScript file)</option>
+        <option value="ps3">PS3 (Adobe Level III PostScript file)</option>
+        <option value="psd">PSD (Adobe Photoshop bitmap file)</option>
+        <option value="ptif">PTIF (Pyramid encoded TIFF)</option>
+        <option value="rgb">RGB (Raw red, green, and blue samples)</option>
+        <option value="rgba">RGBA (Raw red, green, blue, and matte samples)</option>
+        <option value="sgi">SGI (Irix RGB image)</option>
+        <option value="shtml">SHTML (Hypertext Markup Language client-side image map)</option>
+        <option value="sun">SUN (SUN Rasterfile)</option>
+        <option value="svg">SVG (Scalable Vector Graphics)</option>
+        <option value="tga">TGA (Truevision Targa image)</option>
+        <option value="txt">TXT (Raw text file)</option>
+        <option value="uil">UIL (X-Motif UIL table)</option>
+        <option value="uyvy">UYVY (Interleaved YUV raw image)</option>
+        <option value="vicar">VICAR (VICAR rasterfile format)</option>
+        <option value="viff">VIFF (Khoros Visualization Image File Format)</option>
+        <option value="wbmp">WBMP (Wireless bitmap)</option>
+        <option value="xbm">XBM (X Windows system bitmap, black and white only)</option>
+        <option value="xpm">XPM (X Windows system pixmap)</option>
+        <option value="xwd">XWD (X Windows system window dump)</option>
+        <option value="yuv">YUV (CCIR 601 4:1:1)</option>
+      </optgroup>
+    </select> Format</div>
+    <div>Density <select id="density">
+      <option selected value="">Original</option>
+      <option value="1200">1200</option>
+      <option value="600">600</option>
+      <option value="300">300</option>
+      <option value="200">200</option>
+    </select> DPI</div>
+    <div>Resample <select id="resample">
+      <option selected value="">Do not Resample</option>
+      <option value="1200">1200</option>
+      <option value="600">600</option>
+      <option value="300">300</option>
+      <option value="200">200</option>
+    </select> DPI</div>
+    <input type="button" value="Convert" id="convert" disabled>
+  </fieldset>
+  <script type="text/javascript" src="misc.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript" src="drop.js"></script>
+</body>
+</html>
